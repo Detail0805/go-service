@@ -1,0 +1,123 @@
+{
+  "Version": "1.0",
+  "Environment": "local",
+  "Service": "game-server",
+  "Logger": {
+    "Enable": true,
+    "FullPath": false,
+    "FileName": "log",
+    "Level": "info",
+    "Address": "114.32.10.175:8100"
+  },
+  "Mysql": {
+    "Enable": true,
+    "MainDB": {
+      "DriverName": "mysql",
+      "User": "root",
+      "Password": "pass",
+      "Net": "tcp",
+      "Address": "localhost:3306",
+      "DBName": "db",
+      "Timeout": "1m2s",
+      "ReadTimeout": "2s",
+      "WriteTimeout": "2s"
+    },
+    "ReadWriteSplitting": false,
+    "ReadOnlyDB": {
+      "DriverName": "mysql",
+      "User": "root",
+      "Password": "pass",
+      "Net": "tcp",
+      "Address": "localhost:3306",
+      "DBName": "db",
+      "Timeout": "1m2s",
+      "ReadTimeout": "2s",
+      "WriteTimeout": "2s"
+    }
+  },
+  "MQ": {
+    "Enable": false,
+    "Url": "amqp://mq:pass@localhost:15672/",
+    "ResponseTimeoutSecond": 5,
+    "Qos": {
+      "PrefetchCount": 100,
+      "PrefetchSize": 0,
+      "Global": false
+    },
+    "QueueDefinition": [
+      {
+        "Name": "name",
+        "Durable": true,
+        "AutoDelete": false,
+        "Exclusive": false,
+        "NoWaite": false,
+        "Args": {
+          "A": 10,
+          "B": 20
+        }
+      },
+      {
+        "Name": "name",
+        "Durable": true,
+        "AutoDelete": false,
+        "Exclusive": false,
+        "NoWaite": false,
+        "Args": {}
+      }
+    ],
+    "CommandConsumerParam": {
+      "Queue": "name",
+      "Consumer": "",
+      "AutoAck": false,
+      "Exclusive": false,
+      "NoLocal": false,
+      "NoWaite": false,
+      "Args": {}
+    },
+    "ResponseConsumerParam": {
+      "Queue": "name",
+      "Consumer": "",
+      "AutoAck": false,
+      "Exclusive": false,
+      "NoLocal": false,
+      "NoWaite": false,
+      "Args": {}
+    }
+  },
+  "HTTP": {
+    "Enable": false,
+    "Address": "",
+    "Port": "20000",
+    "ReadTimeoutSecond": 10,
+    "WriteTimeoutSecond": 10,
+    "IdleTimeoutSecond": 10,
+    "MaxHeaderBytes": 1048576,
+    "IsTLS": false,
+    "CertificateFile": "cert",
+    "KeyFile": "key"
+  },
+  "Redis": {
+    "Enable": false,
+    "Network": "tcp",
+    "Address": "localhost:6379",
+    "Password": "",
+    "DB": 0,
+    "DialTimeoutSecond": 5,
+    "ReadTimeoutSecond": 3,
+    "WriteTimeoutSecond": 3,
+    "PoolSize": 10
+  },
+  "Others": {
+  },
+  "Websocket": {
+    "Enable": false,
+    "Address": "",
+    "Port": "9000",
+    "ConnPoolSize": 10000,
+    "ChanPoolSize": 1000,
+    "AcceptTimeout": "3s",
+    "AliveTimeout": "3s",
+    "ReadBufferSize": 10240,
+    "WriteBufferSize": 10240
+  }
+}
